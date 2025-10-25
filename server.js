@@ -7,10 +7,10 @@ const axios = require("axios");
 const path = require("path");
 const app = express();
 
-// ⚠️ Penting untuk Render:
+// ====== KONFIGURASI PORT ======
 const PORT = process.env.PORT || 3000;
 
-// ====== Konfigurasi File Statis ======
+// ====== KONFIGURASI FILE STATIS ======
 app.use(express.static(path.join(__dirname, "public")));
 
 // ====== ROUTES HALAMAN ======
@@ -31,8 +31,8 @@ app.get("/berita", (req, res) => {
 });
 
 // ====== ROUTE API CUACA ======
-app.get("/cuaca/:kota", async (req, res) => {
-  const apiKey = "5c622c4d562d46f3f75b350f5e76461c";
+app.get("/api/cuaca/:kota", async (req, res) => {
+  const apiKey = "5c622c4d562d46f3f75b350f5e76461c"; // API key OpenWeatherMap
   const kota = req.params.kota;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${kota}&appid=${apiKey}&units=metric&lang=id`;
 
@@ -50,7 +50,7 @@ app.get("/cuaca/:kota", async (req, res) => {
 
 // ====== ROUTE API BERITA (Mediastack) ======
 app.get("/api/berita", async (req, res) => {
-  const apiKey = "5c622c4d562d46f3f75b350f5e76461c";
+  const apiKey = "5c622c4d562d46f3f75b350f5e76461c"; // API key Mediastack
   const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&countries=id&limit=5&sort=published_desc`;
 
   try {
@@ -69,7 +69,12 @@ app.get("/api/berita", async (req, res) => {
   }
 });
 
-// ====== MENJALANKAN SERVER ======
-app.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di port ${PORT}`);
-});
+// ====== EKSPOR APP UNTUK VERCEL ======
+module.exports = app;
+
+// ====== JALANKAN SERVER (HANYA SAAT LOKAL) ======
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+  });
+}
