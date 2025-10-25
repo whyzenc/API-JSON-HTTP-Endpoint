@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Bantuan - FAQ Aplikasi Berita & Cuaca</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ====== GAYA DASAR ====== */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ffd6ec, #ffe6f2);
+      color: #333;
+    }
+
+    nav {
+      text-align: center;
+      background-color: #ffb6c1;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffebf2;
+      text-shadow: 0 0 5px #fff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    p.intro {
+      text-align: center;
+      font-style: italic;
+      color: #777;
+      margin-bottom: 40px;
+    }
+
+    .faq-item {
+      margin-bottom: 25px;
+      background: #fff0f5;
+      border-left: 6px solid #ff69b4;
+      padding: 20px 25px;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .faq-item h3 {
+      color: #ff69b4;
+      margin-top: 0;
+    }
+
+    .faq-item p, .faq-item ul {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    .img-center {
+      display: block;
+      margin: 40px auto 10px;
+      max-width: 85%;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 3px solid #ffb6c1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ====== NAVIGASI ====== -->
+  <nav>
+    <a href="/">Home</a> |
+    <a href="/tentang">Tentang Saya</a> |
+    <a href="/bantuan">Bantuan</a> |
+    <a href="/berita">Berita</a>
+  </nav>
+
+  <!-- ====== KONTEN ====== -->
+  <div class="container">
+    <h1>💖 Bantuan & FAQ</h1>
+    <p class="intro">Halaman ini berisi pertanyaan umum tentang aplikasi “Berita & Cuaca”.</p>
+
+    <div class="faq-item">
+      <h3>a. Halaman ini digunakan untuk apa?</h3>
+      <p>
+        Halaman ini digunakan untuk membantu pengguna memahami fungsi aplikasi, cara kerja, dan teknologi yang digunakan. 
+        FAQ memberikan panduan singkat agar pengguna dapat menggunakan aplikasi “Berita & Cuaca” dengan mudah.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>b. Apa itu API?</h3>
+      <p>
+        API (Application Programming Interface) adalah antarmuka yang memungkinkan dua sistem saling berkomunikasi dan bertukar data. 
+        Contohnya, aplikasi ini mengambil data cuaca dan berita dari server melalui API agar informasinya selalu terbaru.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>c. API apa yang digunakan dalam aplikasi ini?</h3>
+      <p>
+        Aplikasi ini menggunakan dua API utama:
+      </p>
+      <ul>
+        <li><b>OpenWeatherMap API</b> — untuk menampilkan informasi cuaca berdasarkan lokasi kota.</li>
+        <li><b>Mediastack API</b> — untuk menampilkan berita terkini dari berbagai sumber di dunia.</li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h3>d. Pola Arsitektur API: RESTful</h3>
+      <p>
+        Aplikasi ini menggunakan arsitektur <b>RESTful API</b>, yaitu sistem pertukaran data antara client dan server menggunakan protokol HTTP.
+        RESTful memudahkan integrasi, efisien, dan ringan untuk aplikasi berbasis web modern.
+      </p>
+    </div>
+
+   <img src="/images/api-diagram.png" alt="Diagram API" class="img-center">
+    <p style="text-align:center; color:#777;">
+      <em>Gambar: Ilustrasi cara kerja API antara aplikasi dan server.</em>
+    </p>
+  </div>
+
+  <footer>
+    © 2025 Whenny Zenica | UTS Pemrograman Jaringan 💕
+  </footer>
+</body>
+</html>

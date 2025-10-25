@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tentang Saya - Whenny Zenica</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 40px;
+      background: linear-gradient(135deg, #ffe6f2, #ffd6e8, #fff0f5);
+      color: #444;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff4d94;
+      font-weight: 700;
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .profile img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff99cc;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .profile img:hover {
+      transform: scale(1.05);
+    }
+
+    .profile p {
+      font-style: italic;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .info {
+      line-height: 1.8;
+    }
+
+    h2 {
+      color: #ff4d94;
+      border-bottom: 3px solid #ff99cc;
+      padding-bottom: 5px;
+      margin-top: 25px;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style-type: "💫 ";
+      margin-left: 20px;
+    }
+
+    .nav {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #ff4d94;
+      margin: 0 10px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #cc0066;
+      text-decoration: underline;
+    }
+
+    a {
+      color: #ff4d94;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #cc0066;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 🌸 Partikel Sakura -->
+  <canvas id="sakura"></canvas>
+
+  <!-- 🎵 Background Musik -->
+  <audio autoplay loop volume="0.3">
+    <source src="/music/soft-piano.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Navigasi -->
+  <div class="nav">
+    <a href="/">Home</a> |
+    <a href="/tentang">Tentang Saya</a> |
+    <a href="/bantuan">Bantuan</a> |
+    <a href="/berita">Berita</a>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="container">
+    <div class="profile">
+      <img src="/images/profil.jpg" alt="Foto Profil">
+      <h1>Whenny Zenica</h1>
+      <p><em>Mahasiswa Informatika | Pengembang Web Pemula 💕</em></p>
+    </div>
+
+    <div class="info">
+      <h2>Profil Singkat</h2>
+      <p>
+        Saya adalah mahasiswa program studi <b>Informatika</b> yang memiliki ketertarikan tinggi terhadap 
+        pengembangan web, teknologi API, dan integrasi data.  
+        Aplikasi <b>“Berita & Cuaca”</b> ini merupakan salah satu proyek saya untuk memahami cara kerja server, 
+        RESTful API, dan tampilan web interaktif yang menarik serta informatif.
+      </p>
+
+      <h2>Pendidikan</h2>
+      <ul>
+        <li><b>Universitas:</b> UNIVERSITAS NEGERI PADANG </li>
+        <li><b>Program Studi:</b> Informatika</li>
+        <li><b>Tahun Masuk:</b> 2023</li>
+      </ul>
+
+      <h2>Keahlian</h2>
+      <ul>
+        <li>🌸 Pemrograman Web (HTML, CSS, JavaScript, Node.js)</li>
+        <li>☁️ Penggunaan API & Integrasi Data</li>
+        <li>🎨 Desain Antarmuka (UI/UX Dasar)</li>
+      </ul>
+
+      <h2>Kontak</h2>
+      <p>
+        📧 <b>Email:</b> <a href="mailto:whenyzenica@gmail.com">whennyzenica@gmail.com</a><br>
+        📱 <b>Telepon:</b> 0821-8020-5258<br>
+        🌐 <b>GitHub:</b> <a href="https://github.com/whennyzenica" target="_blank">github.com/whennyzenica</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ✨ Script Partikel Sakura -->
+  <script>
+    const canvas = document.getElementById('sakura');
+    const ctx = canvas.getContext('2d');
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    const petals = [];
+    for (let i = 0; i < 50; i++) {
+      petals.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 6 + 2,
+        speed: Math.random() * 1 + 0.5,
+        drift: Math.random() * 1 - 0.5,
+        opacity: Math.random() * 0.6 + 0.4
+      });
+    }
+
+    function drawPetal(p) {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255, 182, 193, ${p.opacity})`;
+      ctx.ellipse(p.x, p.y, p.size, p.size / 2, Math.PI / 4, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      petals.forEach(p => {
+        p.y += p.speed;
+        p.x += p.drift;
+        if (p.y > canvas.height) p.y = -10;
+        drawPetal(p);
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
