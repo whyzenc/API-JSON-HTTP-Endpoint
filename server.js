@@ -52,7 +52,7 @@ app.get("/cuaca/:kota", async (req, res) => {
 
 // ====== ROUTE API BERITA (Mediastack) ======
 app.get("/api/berita", async (req, res) => {
-  const apiKey = "5c622c4d562d46f3f75b350f5e76461c"; // API Key Mediastack
+  const apiKey = "c12dce76598bed265f0096af73c7166b"; // API Key Mediastack
   const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&countries=id&limit=5&sort=published_desc`;
 
   try {
