@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Aplikasi Berita & Cuaca - Whenny Zenica</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌤️ Aplikasi Berita & Cuaca - Whenny Zenica</title>
+  <link rel="stylesheet" href="/css/style.css" />
   <style>
-    /* ====== Gaya Umum ====== */
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #ffd6ec, #ffe6f2);
@@ -30,8 +30,8 @@
     }
 
     nav a:hover {
-      color: #ffebf2;
-      text-shadow: 0 0 5px #fff;
+      color: #fff5fa;
+      text-shadow: 0 0 6px #fff;
     }
 
     .container {
@@ -42,16 +42,11 @@
       padding: 40px;
       text-align: center;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-in-out;
     }
 
-    h1 {
-      color: #ff69b4;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #555;
-    }
+    h1 { color: #ff69b4; }
+    p { color: #555; }
 
     input[type="text"] {
       padding: 10px;
@@ -60,6 +55,7 @@
       border: 2px solid #ffb6c1;
       outline: none;
       margin-right: 10px;
+      font-size: 14px;
     }
 
     button {
@@ -70,10 +66,12 @@
       border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
+      font-size: 14px;
     }
 
     button:hover {
       background-color: #ff85c1;
+      transform: scale(1.05);
     }
 
     #hasil {
@@ -85,11 +83,6 @@
       animation: fadeIn 1s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     footer {
       text-align: center;
       padding: 20px;
@@ -97,13 +90,21 @@
       font-size: 14px;
     }
 
-    audio {
-      display: none;
+    audio { display: none; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      input[type="text"] { width: 100%; margin-bottom: 10px; }
+      button { width: 100%; }
     }
   </style>
 </head>
+
 <body>
-  <!-- ====== Navigasi ====== -->
   <nav>
     <a href="/">Home</a> |
     <a href="/tentang">Tentang Saya</a> |
@@ -111,41 +112,41 @@
     <a href="/berita">Berita</a>
   </nav>
 
-  <!-- ====== Konten Utama ====== -->
   <div class="container">
     <h1>🌤️ Aplikasi Berita & Cuaca</h1>
     <p>Masukkan nama kota untuk melihat kondisi cuaca terkini:</p>
 
-    <input type="text" id="kota" placeholder="Contoh: Bandung">
+    <input type="text" id="kota" placeholder="Contoh: Padang" />
     <button onclick="cekCuaca()">Cek Cuaca</button>
 
     <div id="hasil"></div>
   </div>
 
-  <!-- ====== Musik Latar (Opsional) ====== -->
   <audio autoplay loop>
-    <source src="/music/soft-piano.mp3" type="audio/mpeg">
+    <source src="/music/soft-piano.mp3" type="audio/mpeg" />
   </audio>
 
   <footer>
-    © 2025 Whenny Zenica | Proyek UTS Pemrograman Jaringan
+    © 2025 Whenny Zenica | UTS Pemrograman Jaringan
   </footer>
 
-  <!-- ====== Script API Cuaca ====== -->
   <script>
     async function cekCuaca() {
-      const kota = document.getElementById('kota').value.trim();
-      const hasil = document.getElementById('hasil');
+      const kota = document.getElementById("kota").value.trim();
+      const hasil = document.getElementById("hasil");
 
       if (!kota) {
         hasil.innerHTML = "<p style='color:#ff69b4;'>⚠️ Silakan masukkan nama kota terlebih dahulu.</p>";
         return;
       }
 
-      try {
-        const res = await fetch(`/cuaca/${kota}`);
-        const data = await res.json();
+      hasil.innerHTML = "<p style='color:#ff69b4;'>⏳ Mengambil data cuaca...</p>";
 
+      try {
+        const res = await fetch(`/cuaca/${encodeURIComponent(kota)}`);
+        if (!res.ok) throw new Error("Gagal mengambil data dari server.");
+
+        const data = await res.json();
         if (data.cod === "404") {
           hasil.innerHTML = `<p style='color:#ff69b4;'>Kota tidak ditemukan 😢</p>`;
         } else {
@@ -157,7 +158,7 @@
           `;
         }
       } catch (err) {
-        hasil.innerHTML = `<p style='color:#ff69b4;'>Terjadi kesalahan saat mengambil data cuaca.</p>`;
+        hasil.innerHTML = `<p style='color:#ff69b4;'>💔 Gagal mengambil data cuaca.<br><small>${err.message}</small></p>`;
       }
     }
   </script>
