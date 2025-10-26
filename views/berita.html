@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Berita Terkini - Whenny Zenica</title>
+  <title>📰 Berita Terkini - Whenny Zenica</title>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     body {
@@ -41,6 +41,7 @@
       padding: 40px;
       text-align: center;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
     }
 
     h1 {
@@ -95,11 +96,15 @@
       color: #ff69b4;
       font-style: italic;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ====== Navigasi ====== -->
   <nav>
     <a href="/">Home</a> |
     <a href="/tentang">Tentang Saya</a> |
@@ -107,7 +112,6 @@
     <a href="/berita">Berita</a>
   </nav>
 
-  <!-- ====== Konten Berita ====== -->
   <div class="container">
     <h1>📰 Berita Terkini</h1>
     <p id="loading">⏳ Sedang mengambil berita...</p>
@@ -120,7 +124,6 @@
     © 2025 Whenny Zenica | Aplikasi Berita & Cuaca
   </footer>
 
-  <!-- ====== Script Pengambilan API ====== -->
   <script>
     async function loadNews() {
       const container = document.getElementById("news-container");
