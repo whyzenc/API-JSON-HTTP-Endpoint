@@ -45,8 +45,14 @@
       animation: fadeIn 0.8s ease-in-out;
     }
 
-    h1 { color: #ff69b4; }
-    p { color: #555; }
+    h1 {
+      color: #ff69b4;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+    }
 
     input[type="text"] {
       padding: 10px;
@@ -90,7 +96,9 @@
       font-size: 14px;
     }
 
-    audio { display: none; }
+    audio {
+      display: none;
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -105,6 +113,7 @@
 </head>
 
 <body>
+  <!-- ====== Navigasi ====== -->
   <nav>
     <a href="/">Home</a> |
     <a href="/tentang">Tentang Saya</a> |
@@ -112,6 +121,7 @@
     <a href="/berita">Berita</a>
   </nav>
 
+  <!-- ====== Konten Utama ====== -->
   <div class="container">
     <h1>🌤️ Aplikasi Berita & Cuaca</h1>
     <p>Masukkan nama kota untuk melihat kondisi cuaca terkini:</p>
@@ -122,6 +132,7 @@
     <div id="hasil"></div>
   </div>
 
+  <!-- ====== Musik Latar ====== -->
   <audio autoplay loop>
     <source src="/music/soft-piano.mp3" type="audio/mpeg" />
   </audio>
@@ -130,6 +141,7 @@
     © 2025 Whenny Zenica | UTS Pemrograman Jaringan
   </footer>
 
+  <!-- ====== Script API Cuaca ====== -->
   <script>
     async function cekCuaca() {
       const kota = document.getElementById("kota").value.trim();
@@ -143,22 +155,33 @@
       hasil.innerHTML = "<p style='color:#ff69b4;'>⏳ Mengambil data cuaca...</p>";
 
       try {
+        // 🔗 Mengambil data dari server lokal / Render / Vercel
         const res = await fetch(`/cuaca/${encodeURIComponent(kota)}`);
+
         if (!res.ok) throw new Error("Gagal mengambil data dari server.");
 
         const data = await res.json();
-        if (data.cod === "404") {
+
+        if (data.cod == "404") {
           hasil.innerHTML = `<p style='color:#ff69b4;'>Kota tidak ditemukan 😢</p>`;
-        } else {
-          hasil.innerHTML = `
-            <h2 style="color:#ff69b4;">Cuaca di ${data.name}</h2>
-            <p><b>${data.weather[0].description}</b></p>
-            <p>🌡️ Suhu: ${data.main.temp}°C</p>
-            <p>💨 Kelembapan: ${data.main.humidity}%</p>
-          `;
+          return;
         }
+
+        hasil.innerHTML = `
+          <h2 style="color:#ff69b4;">Cuaca di ${data.name}</h2>
+          <p><b>${data.weather[0].description}</b></p>
+          <p>🌡️ Suhu: ${data.main.temp}°C</p>
+          <p>💨 Kelembapan: ${data.main.humidity}%</p>
+          <p>🌬️ Kecepatan Angin: ${data.wind.speed} m/s</p>
+        `;
       } catch (err) {
-        hasil.innerHTML = `<p style='color:#ff69b4;'>💔 Gagal mengambil data cuaca.<br><small>${err.message}</small></p>`;
+        hasil.innerHTML = `
+          <p style='color:#ff69b4;'>
+            💔 Gagal mengambil data cuaca.<br>
+            <small>${err.message}</small>
+          </p>
+        `;
+        console.error("❌ Error:", err);
       }
     }
   </script>
